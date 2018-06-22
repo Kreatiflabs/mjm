@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin</title>
+ 
+ 
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -40,7 +43,10 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
+<?php
+    define("ROOT_PATH", '../');
+    include ROOT_PATH.'/koneksidb/koneksi.php';
+?>
   <header class="main-header">
     <!-- Logo -->
     <a href="index.php" class="logo">
@@ -62,7 +68,9 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/avatar5.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs">
+                Admin
+              </span>
             </a>
             <ul class="dropdown-menu">
               <!-- Menu Footer-->
@@ -116,8 +124,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="?page=navigation&act=add"><i class="fa fa-circle-o"></i>Add Machine</a></li>
-            <li><a href="?page=navigation&act=list"><i class="fa fa-circle-o"></i>List Machine</a></li>
+            <li><a href="?page=navigation&act=addMachine"><i class="fa fa-circle-o"></i>Add Machine</a></li>
+            <li><a href="?page=navigation&act=listMachine"><i class="fa fa-circle-o"></i>List Machine</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -175,11 +183,17 @@
             include ('modules/product/AddProduct.php');
           }else if ($page == 'navigation' && $act == 'list') {
             include ('modules/product/ListProduct.php');
+          }else if ($page == 'navigation' && $act == 'addMachine') {
+            include ('modules/machines/addMachines.php');  
+          }else if ($page == 'navigation' && $act == 'listMachine') {
+            include ('modules/machines/listMachines.php'); 
+
           }else if ($page == 'navigation' && $act == 'messages') {
             include ('modules/messages/ListMessages.php');
             
 
-          }else if ($page == 'management' && $act == 'list') {
+          }
+          else if ($page == 'management' && $act == 'list') {
             include ('modules/menu/ListMenu.php');
           }else{
             include ('modules/dashboard/dashboard.php');
@@ -195,24 +209,11 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.4.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="#">Mjm Inc</a>.</strong> All rights
+    <strong>Copyright &copy; <?php echo date("Y");?> <a href="#">Mjm Inc</a>.</strong> All rights
     reserved.
   </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
+ 
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>

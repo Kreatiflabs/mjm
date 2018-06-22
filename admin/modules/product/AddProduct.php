@@ -1,23 +1,64 @@
 <?php
-	//ini_set('display_errors', 1);
-	//error_reporting(E_ALL|E_STRICT);
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL|E_STRICT);
 	
-	define("ROOT_PATH", '../');
-	include ROOT_PATH . '/koneksidb/koneksi.php';
+	 include ROOT_PATH.'/koneksidb/koneksi.php';
 
-		$product = $_POST['product'];
-		$description =$_POST['description'];
-	   //   echo("First name: " .$product. "<br />\n");
-	 //     echo("Last name: " .$description. "<br />\n");
 
-	   	$sql    = 'INSERT INTO produk (nama,deskripsi) VALUES("'.$product.'","'.$description.'")';
- 		$query  = mysqli_query($con, $sql);
+    //Target Dir File
+    $targetDir = "../img/portfolio/products/fullsize/";
+    
+    //Target Dir Thumbnails
+    $targetDirThumb = "../img/portfolio/products/thumbnails/";
 
-		if ($query === TRUE) {
-    	//	echo "New record created successfully";
-		} else {
-    	//	echo "Error: " . $sql . "<br>" . $con->error;
-		}
+    //rename image file
+    $sqlImg    = 'SELECT idproduk FROM produk ORDER BY idproduk DESC';
+    $queryImg  = mysqli_query($con, $sqlImg);
+    $row = mysqli_fetch_array($queryImg);
+    $a=$row['idproduk']+1;
+    $b="IMG_".$a;
+  
+    //base name upload
+    $targetFile = $targetDir.$b;
+    $file = basename($targetFile);
+
+    $targetThumb = $targetDirThumb.$b;
+
+
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+      if(isset($_POST["submit"])) {
+          $product     = $_POST['product'];
+          $description = $_POST['description'];
+          $createdDate = date("Y-m-d h:i:sa");
+          $status      = $_POST['status'];
+
+      $check = getimagesize($_FILES["images"]["tmp_name"]);
+        if($check !== false) {
+        //  echo "File is an image - " . $check["mime"] . ".";
+          $uploadOk = 1;
+            if ($uploadOk = 1) {
+              move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
+              copy($targetFile, $targetThumb);
+              //Insert to Query     
+              $sql = 'INSERT INTO produk (nama,deskripsi,thumbnails,file,created_date,created_by,status) 
+                    VALUES("'.$product.'","'.$description.'","'.$file.'","'.$file.'","'.$createdDate.'","admin","'.$status.'")';
+              $query  = mysqli_query($con, $sql);
+                if($query === TRUE){
+              echo '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                    Success.
+                  </div>';
+              }
+            } else {
+              echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+          echo "File is not an image.";
+          $uploadOk = 0;
+        }
+      }
 
  		$con->close();
 
@@ -45,7 +86,7 @@
               <h4  align="left"> <i class="fa fa-edit"></i> Product</h4>
 
           	<div class="col-md-8">
-          	  <form role="form" action="#" method="POST">
+          	  <form role="form" action="#" method="POST" enctype="multipart/form-data" name="form" onSubmit="return OnUploadCheck();">
               	<div class="box-body">
                		<div class="form-group">
                 		<label>Product Name</label>
@@ -57,25 +98,41 @@
                 	</div>
                		<div class="form-group">
                  		<label for="InputFile">File input</label>
-                 		<input type="file" id="InputFile">
+                 		<input type="file" name="images" id="InputFile">
                		</div>
                		<div class="form-group">
               			<label>Status</label></br>
                 		<label>
-                  			<input type="radio" name="status" class="minimal" checked>
+                  			<input type="radio" name="status" value="1" class="minimal" checked>
                   			Active
                 		</label>&nbsp;
                 		<label>
-                  			<input type="radio" name="status" class="minimal">
+                  			<input type="radio" name="status" value="0" class="minimal">
                   			Inactive
                 		</label>
               		</div>
              	</div>
              	<div class="box-footer">
                 	<button type="reset" class="btn btn-danger">Cancel</button>	
-                	<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                	<button type="submit" onclick="checkFile();" name="submit" class="btn btn-primary">Submit</button>
               	</div>
               </form>
+              <script>
+                function checkFile() {
+                    document.getElementById("InputFile").required = true;
+    
+                }
+                function OnUploadCheck(){
+                  var extall="jpg,jpeg,gif,png";
+                  file = document.form.images.value;
+                  ext = file.split('.').pop().toLowerCase();
+                    if(parseInt(extall.indexOf(ext)) < 0){
+                      alert('Extension File Images Support : ' + extall);
+                      return false;
+                    }
+                    return true;
+                }
+              </script>
             </div>
           </div>
         </div>

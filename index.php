@@ -138,8 +138,8 @@
                  while ($row = mysqli_fetch_array($query)){
              ?>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/<?php echo $row['gambar'];  ?>">
-              <img class="img-fluid" src="img/portfolio/thumbnails/<?php echo $row['gambar'];  ?>" alt="">
+            <a class="portfolio-box" href="img/portfolio/products/fullsize/<?php echo $row['file']; ?>">
+              <img class="img-fluid" src="img/portfolio/products/thumbnails/<?php echo $row['thumbnails'];  ?>" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -187,7 +187,7 @@
     
     <section class="bg-dark text-white navbar">
         <div class="container text-left">
-        <p class="mb-6">© 2017, MJM Inc. All Rights Reserved. </p>
+        <p class="mb-6">Copyright&copy;<?php echo date("Y");?>, MJM Inc. All Rights Reserved. </p>
       </div>
     </section>
 
