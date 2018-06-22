@@ -18,6 +18,7 @@
     <ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Product</a></li>
         <li class="active">List Product</li>
+        <li></li>
     </ol>
 </section>
   <section class="content">
@@ -25,7 +26,8 @@
     	<div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"><i class="fa fa-list-alt"></i> List Product</h3>
+              <h3 class="box-title"><i class="fa fa-list-alt"></i> List Product</h3>&nbsp
+               <a href='?page=navigation&act=list' name='refresh' class='fa fa-refresh'/> </a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -70,7 +72,7 @@
     	             		  </tr>";
 			         		$i++;
                 	}
-                  $con->close();
+                  
                  ?>
                 
               </table>

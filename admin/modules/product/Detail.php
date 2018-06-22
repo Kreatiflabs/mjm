@@ -26,11 +26,11 @@
                 	<label>Description</label>
                 	<textarea class="form-control" id='description' rows="4" name="deskripsi" required ><?php echo $row['deskripsi']; ?></textarea>
             	</div>
-              <!--   <div class="form-group">
-                        <label for="InputFile">File input</label>
-                        <input type="file" name="images" id="inputFile">
-                        
-               </div> -->
+               <!--  <div class="form-group">
+                       <label for="InputFile">File input</label>
+                       <input type="file" name="images" id="inputFile">
+                       
+                              </div>  -->
                 <div class="form-group">
                         <label>Status</label></br>
                         <label>

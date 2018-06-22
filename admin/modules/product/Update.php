@@ -38,18 +38,21 @@
         $createdDate = date("Y-m-d h:i:sa");
         $status      = $_POST['status'];
 
-    //  $check = getimagesize($_FILES["images"]["tmp_name"]);
-      //  if($check !== false) {
+     // $check = getimagesize($_FILES["images"]["tmp_name"]);
+     //   if($check !== false) {
         
-          // $uploadOk = 1;
-          //   if ($uploadOk = 1) {
-              //move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
-              //copy($targetFile, $targetThumb);
+     //      $uploadOk = 1;
+     //        if ($uploadOk = 1) {
+     //          move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
+     //          copy($targetFile, $targetThumb);
+              
               //Update to Query     
-                 // $sql = "UPDATE produk SET nama='$product',thumbnails='$file',file='$file',created_date='$createdDate',created_by='admin',status='$status' WHERE idproduk = $id";
-              $sql = "UPDATE produk SET nama='$product',deskripsi='$description',created_date='$createdDate',created_by='admin',status='$status' WHERE idproduk = $id";
-                 $query  = mysqli_query($con, $sql);
-              $query  = mysqli_query($con, $sql);
+              //$sql = "UPDATE produk SET nama='$product',deskripsi='$description',thumbnails='$file',file='$file',created_date='$createdDate',created_by='admin',status='$status' WHERE idproduk = $id";
+              //$query  = mysqli_query($con, $sql);
+
+               $sql = "UPDATE produk SET nama='$product',deskripsi='$description',created_date='$createdDate',created_by='admin',status='$status' WHERE idproduk = $id";
+               $query  = mysqli_query($con, $sql);
+
               if($query === TRUE){
               echo '<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -57,13 +60,13 @@
                     Success Update.
                   </div>';
               }
-            // } else {
-            //   echo "Sorry, there was an error uploading your file.";
-            // }
-      //  } else {
-        //   echo "File is not an image.";
-        //   $uploadOk = 0;
-        // }		
+       //      } else {
+       //        echo "Sorry, there was an error uploading your file.";
+       //      }
+       // } else {
+       //    echo "File is not an image.";
+       //    $uploadOk = 0;
+       //  }		
  	    
     $con->close();
 
