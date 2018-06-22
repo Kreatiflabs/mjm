@@ -8,7 +8,9 @@
 	$query  = mysqli_query($con, $sql);
 
 ?>
+<!-- Alert -->
 <div class="alert-data"></div>
+
 <section class="content-header">
   <h1>Product
       <small>List Product</small>

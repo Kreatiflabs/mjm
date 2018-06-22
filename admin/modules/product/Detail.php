@@ -16,6 +16,7 @@
         while ($row = mysqli_fetch_array($query)){ ?>
         	<!-- START FORM -->
         	<form role="form" id="data" enctype="multipart/form-data" name="form" >
+                <div class="alert-data-succes"></div>
             	<input type="hidden" id='idproduct' name="id" value="<?php echo $row['idproduk']; ?>">
             	<div class="form-group">
                 	<label>Product Name</label>
@@ -88,8 +89,8 @@
             type: 'post',
             data: formData,
             success: function (data) {
-            //$('.alert-data').html(data);
-            $('#infoModal').modal('hide');    
+            $('.alert-data-succes').html(data);
+            //$('#infoModal').modal('hide');    
         },
         cache: false,
         contentType: false,
