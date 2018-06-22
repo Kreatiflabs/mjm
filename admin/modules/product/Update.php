@@ -50,6 +50,13 @@
               $sql = "UPDATE produk SET nama='$product',deskripsi='$description',created_date='$createdDate',created_by='admin',status='$status' WHERE idproduk = $id";
                  $query  = mysqli_query($con, $sql);
               $query  = mysqli_query($con, $sql);
+              if($query === TRUE){
+              echo '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                    Success Delete.
+                  </div>';
+              }
             // } else {
             //   echo "Sorry, there was an error uploading your file.";
             // }

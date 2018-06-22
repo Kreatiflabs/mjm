@@ -8,6 +8,7 @@
 	$query  = mysqli_query($con, $sql);
 
 ?>
+<div class="alert-data"></div>
 <section class="content-header">
   <h1>Product
       <small>List Product</small>
@@ -23,7 +24,6 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title"><i class="fa fa-list-alt"></i> List Product</h3>
-              <div class="alert-data"></div>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -55,7 +55,7 @@
                                   <a href='#infoModal' class='fa fa-edit' data-toggle='modal' 
                                    data-id=".$row['idproduk']." >
                                   </a> |  <a href='#delete' name='delete' class='fa fa-times'  
-                                   data-id=".$row['idproduk']." >
+                                   id=".$row['idproduk']." >
                                   </a>
 
                                </td>
@@ -116,14 +116,20 @@
 
         $(document).ready(function(){
           $('a').click(function (e) {
-            var rowid = $(e.relatedTarget).data('');
-            //var rowid = 57;
+              var el = this;
+              var id = this.id;
+              
               $.ajax({
                 type : 'post',
                 url  : 'modules/product/Delete.php',
-                data : 'rowid='+rowid,
+                data: { rowid:id},
                 success : function(data){
                   $('.alert-data').html(data); //alert modal
+                  // Removing row from HTML Table
+                  $(el).closest('tr').css('background','tomato');
+                  $(el).closest('tr').fadeOut(800, function(){ 
+                    $(this).remove();
+                  });
                 }
             });
          });

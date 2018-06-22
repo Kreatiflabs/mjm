@@ -88,7 +88,8 @@
             type: 'post',
             data: formData,
             success: function (data) {
-            //alert(data);    
+            //$('.alert-data').html(data);
+            $('#infoModal').modal('hide');    
         },
         cache: false,
         contentType: false,
