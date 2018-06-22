@@ -136,8 +136,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="?page=navigation&act=add"><i class="fa fa-circle-o"></i>Add Content</a></li>
-            <li><a href="?page=navigation&act=list"><i class="fa fa-circle-o"></i>List Content</a></li>
+            <li><a href="?page=navigation&act=addContent"><i class="fa fa-circle-o"></i>Add Content</a></li>
+            <li><a href="?page=navigation&act=listContent"><i class="fa fa-circle-o"></i>List Content</a></li>
           </ul>
         </li>
          <li class="treeview">
@@ -187,7 +187,12 @@
             include ('modules/machines/addMachines.php');  
           }else if ($page == 'navigation' && $act == 'listMachine') {
             include ('modules/machines/listMachines.php'); 
+          }else if ($page == 'navigation' && $act == 'addContent') {
+            include ('modules/content/AddContent.php'); 
+          }else if ($page == 'navigation' && $act == 'listContent') {
+            include ('modules/content/ListContent.php'); 
 
+          
           }else if ($page == 'navigation' && $act == 'messages') {
             include ('modules/messages/ListMessages.php');
             
